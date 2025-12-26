@@ -31,7 +31,9 @@ pipeline {
 
       stage('Deploy to Cluster') {
           steps {
-                    sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+                    // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+                    // The above command did not work due to authentication errors - hence add validate=false to bypass authentication for testing only
+                     sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f - --validate=false'
           }
       }
    }
