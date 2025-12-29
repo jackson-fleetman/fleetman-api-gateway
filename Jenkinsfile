@@ -11,7 +11,7 @@ pipeline {
    }
 
    tools { 
-         maven 'MAVEN_HOME' 
+         maven 'maven 3.9.12' 
    }
 
    stages {
