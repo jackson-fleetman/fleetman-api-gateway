@@ -22,9 +22,9 @@ pipeline {
                withMaven(maven: 'maven 3.9.12') { // Use the name configured in Global Tool Configuration to find the correct MAVEN_HOME
                   sh '''export MAVEN_HOME=/tmp/maven/apache-maven-3.9.12'''
                   sh '''export PATH=$PATH:$MAVEN_HOME/bin'''
-                  sh '''mvn --version'''
+                  sh '''./mvn --version'''
                   
-                  sh '''mvn clean package'''
+                  sh '''./mvn clean package'''
                }
          }
       }
