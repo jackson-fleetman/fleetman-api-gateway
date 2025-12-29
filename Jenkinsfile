@@ -17,6 +17,11 @@ pipeline {
             git credentialsId: 'GitHub', url: "https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}"
          }
       }
+
+      tools { 
+         maven 'MAVEN_HOME' 
+       }
+
       stage('Build') {
          steps {
                withMaven(maven: 'maven 3.9.12') { // Use the name configured in Global Tool Configuration to find the correct MAVEN_HOME
