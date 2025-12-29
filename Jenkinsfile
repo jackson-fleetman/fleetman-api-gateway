@@ -20,7 +20,8 @@ pipeline {
       stage('Build') {
          steps {
             withMaven(maven: 'Maven 3.9.12') { // Use the name configured in Global Tool Configuration to find the correct MAVEN_HOME
-            sh '''mvn clean package'''
+               sh '''mvn clean package'''
+            }
          }
       }
       
