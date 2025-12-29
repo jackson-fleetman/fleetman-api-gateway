@@ -36,11 +36,19 @@ pipeline {
       }
       
       stage('Build and Push Image') {
+         agent {
+            docker {
+               // Set both label and image
+                label 'docker'
+                image 'node:7-alpine'
+                args '--name docker-node' // list any args
+            }
+         }
          steps {
            sh 'docker image build -t ${REPOSITORY_TAG} .'
          }
       }
-
+      
       stage('Deploy to Cluster') {
           steps {
                     // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
