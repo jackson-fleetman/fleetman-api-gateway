@@ -55,10 +55,11 @@ pipeline {
                      // Install kubectl
                      sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'
                      sh 'chmod +x ./kubectl'
-                     // withKubeConfig([credentialsId: 'admin-jenkins']) { // Use Jenkins credentials for kubeconfig
-                     //    sh './kubectl get pods' // Execute using the local path
-                     // }
-                           
+
+                     // Install envsubst
+                     sh 'curl -LO "https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst"'
+                     sh 'chmod +x ./envsubst'
+
                      // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
                      // The above command did not work due to authentication errors - hence add validate=false to bypass authentication for testing only
 
