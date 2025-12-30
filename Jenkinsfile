@@ -36,15 +36,15 @@ pipeline {
       }
       
       stage('Build and Push Image') {
-         agent {
-            docker {
+         // agent {
+         //    docker {
                 // Set both label and image
                 // label 'docker'
                 // image 'alpine/socat'
                 // list any args
                 // args '--name docker-node' 
-            }
-         }
+         //    }
+         // }
          steps {
            sh 'docker image build -t ${REPOSITORY_TAG} .'
          }
