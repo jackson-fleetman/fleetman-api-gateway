@@ -10,5 +10,5 @@ COPY target/fleetman-0.0.1-SNAPSHOT.jar webapp.jar
 
 CMD ["java", "-jar","webapp.jar"]
 
-# install getttext-base so that envsubst can work in Jenkinsfile
-RUN apt-get update && apt-get install -y gettext-base && rm -rf /var/lib/apt/lists/*
+
+
