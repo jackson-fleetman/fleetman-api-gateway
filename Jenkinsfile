@@ -61,7 +61,10 @@ pipeline {
                            
                      // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
                      // The above command did not work due to authentication errors - hence add validate=false to bypass authentication for testing only
-                     sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f - --validate=false'
+
+                     // test whether ./ makes a difference
+                     sh 'envsubst < ${WORKSPACE}/deploy.yaml | ./kubectl apply -f - --validate=false'
+                     // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f - --validate=false'
                   
           }
       }
