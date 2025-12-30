@@ -52,6 +52,11 @@ pipeline {
       
       stage('Deploy to Cluster') {
           steps {
+                     // Install kubectl
+                     sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'
+                     sh 'chmod +x ./kubectl'
+                     withKubeConfig([credentialsId: 'admin-jenkins']) { // Use Jenkins credentials for kubeconfig
+
                      // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
                      // The above command did not work due to authentication errors - hence add validate=false to bypass authentication for testing only
                      sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f - --validate=false'
