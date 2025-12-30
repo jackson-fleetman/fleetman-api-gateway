@@ -49,11 +49,11 @@ pipeline {
            sh 'docker image build -t ${REPOSITORY_TAG} .'
 
             // Push image to Docker Hub
-           withCredentials([usernamePassword(credentialsId: ${DOCKERHUB_CRED}, usernameVariable: ${DOCKERHUB_USER}, passwordVariable: ${DOCKERHUB_PASS})]) {
-               sh '''
-               echo "$DOCKERHUB_PASS" | docker login --username "$DOCKERHUB_USER" --password-stdin
-               docker push $DOCKER_USER/$REPOSITORY_TAG:${env.GIT_COMMIT}
-               '''
+            // withCredentials([usernamePassword(credentialsId: ${DOCKERHUB_CRED}, usernameVariable: ${DOCKERHUB_USER}, passwordVariable: ${DOCKERHUB_PASS})]) {
+            //    sh '''
+            //    echo "$DOCKERHUB_PASS" | docker login --username "$DOCKERHUB_USER" --password-stdin
+            //    docker push $DOCKER_USER/$REPOSITORY_TAG:${env.GIT_COMMIT}
+            //    '''
            }
     
 
