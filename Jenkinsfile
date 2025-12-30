@@ -52,10 +52,19 @@ pipeline {
       
       stage('Deploy to Cluster') {
           steps {
-                    // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
-                    // The above command did not work due to authentication errors - hence add validate=false to bypass authentication for testing only
+                  script {
+                     // If using an Alpine agent/image
+                     sh 'apk update && apk add gettext'
+                     // Or if using a Debian/Ubuntu agent/image
+                     // sh 'apt-get update && apt-get install -y gettext-base'
+                     
+                     // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+                     // The above command did not work due to authentication errors - hence add validate=false to bypass authentication for testing only
                      sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f - --validate=false'
+                  }
           }
       }
    }
 }
+
+
