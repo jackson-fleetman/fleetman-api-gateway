@@ -60,9 +60,6 @@ pipeline {
                      sh 'curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst'
                      sh 'chmod +x ./envsubst'
 
-
-             curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst
-
                      // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
                      // The above command did not work due to authentication errors - hence add validate=false to bypass authentication for testing only
 
