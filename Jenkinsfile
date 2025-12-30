@@ -53,10 +53,11 @@ pipeline {
       stage('Deploy to Cluster') {
           steps {
                   script {
+                     // Install gettext-base for envsubst command to work
                      // If using an Alpine agent/image
-                     sh 'apk update && apk add gettext'
+                     // sh 'apk update && apk add gettext'
                      // Or if using a Debian/Ubuntu agent/image
-                     // sh 'apt-get update && apt-get install -y gettext-base'
+                     sh 'apt-get update && apt-get install -y gettext-base'
                      
                      // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
                      // The above command did not work due to authentication errors - hence add validate=false to bypass authentication for testing only
