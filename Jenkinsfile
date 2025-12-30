@@ -1,3 +1,4 @@
+
 pipeline {
    agent any
 
@@ -8,6 +9,10 @@ pipeline {
 
      SERVICE_NAME = "fleetman-api-gateway"
      REPOSITORY_TAG="${YOUR_DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
+
+
+     // Set the DOCKER_HOST environment variable to the socat container's network address and exposed port, in order to use Socat's DOCKER Commands
+      DOCKER_HOST = 'tcp://host.docker.internal:2376' // Use the name or IP of your socat container
    }
 
    tools { 
