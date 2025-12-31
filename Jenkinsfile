@@ -21,20 +21,20 @@ pipeline {
 
    stages {
       // This is to test whether Docker Command can be accessed
-     stage('Docker Test') {
-         agent {
-           docker {
+      // stage('Docker Test') {
+      //   agent {
+      //     docker {
              // Set both label and image
-             label 'docker'
-             image 'desktop-worker:alpine/socat'
+      //       label 'docker'
+      //       image 'desktop-worker:alpine/socat'
              // args '--name docker-node' // list any args
-           }
-         }
-         steps {
+      //     }
+      //   }
+      //   steps {
            // Steps run in node:7-alpine docker container on docker agent
-           sh 'docker version'
-         }
-       }
+      //     sh 'docker version'
+      //   }
+      // }
 
       
       stage('Preparation') {
