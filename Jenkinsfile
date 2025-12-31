@@ -12,7 +12,7 @@ pipeline {
 
 
      // Set the DOCKER_HOST environment variable to the socat container's network address and exposed port, in order to use Socat's DOCKER Commands
-      DOCKER_HOST = 'tcp://host.docker.internal:2376' // Use the name or IP of your socat container
+      DOCKER_HOST = 'tcp://host.docker.internal:2375' // Use the name of your dokcer host
    }
 
    tools { 
