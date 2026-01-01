@@ -71,12 +71,6 @@ pipeline {
          //    }
          // }
          steps {
-            // Check original Docker default context. The current context is based on unix: unix:///var/run/docker.sock
-            sh 'docker context ls'
-            // Update Docker context to windows: npipe:////./pipe/docker_engine
-            sh 'docker context update default --docker "host=npipe:////./pipe/docker_engine"'
-            // Check updated Docker context. 
-            sh 'docker context ls'
             
             sh 'docker image build -t ${REPOSITORY_TAG} .'
 
