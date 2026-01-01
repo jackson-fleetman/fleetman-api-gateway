@@ -95,14 +95,8 @@ pipeline {
                      // sh 'curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst'
                      // sh 'chmod +x ./envsubst'
 
-                     // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
-                     // The above command did not work due to authentication errors - hence add validate=false to bypass authentication for testing only
-
-                     // ./ makes a difference; otherwise command not found error will be encountered
-                     // Not required for Course as it has packaged envsubst together with Jenkins into the built Docker image 
-                     // sh './envsubst < ${WORKSPACE}/deploy.yaml | ./kubectl apply -f - --validate=false'
-                     sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f - --validate=false'
-                  
+                     sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+                     
           }
       }
    }
