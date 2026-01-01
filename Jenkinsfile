@@ -71,7 +71,9 @@ pipeline {
          //    }
          // }
          steps {
-           sh 'docker image build -t ${REPOSITORY_TAG} .'
+            // Check Docker context
+            sh 'docker context ls'
+            sh 'docker image build -t ${REPOSITORY_TAG} .'
 
             // Push image to Docker Hub
             // withCredentials([usernamePassword(credentialsId: ${DOCKERHUB_CRED}, usernameVariable: ${DOCKERHUB_USER}, passwordVariable: ${DOCKERHUB_PASS})]) {
