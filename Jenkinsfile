@@ -71,8 +71,13 @@ pipeline {
          //    }
          // }
          steps {
-            // Check Docker context
+            // Check original Docker context. The current context is based on unix: unix:///var/run/docker.sock
             sh 'docker context ls'
+            // Update Docker context to windows: npipe:////./pipe/docker_engine
+            sh 'docker context update --docker "npipe:////./pipe/docker_engine"'
+            // Check updated Docker context. 
+            sh 'docker context ls'
+            
             sh 'docker image build -t ${REPOSITORY_TAG} .'
 
             // Push image to Docker Hub
