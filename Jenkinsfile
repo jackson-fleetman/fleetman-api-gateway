@@ -12,12 +12,14 @@ pipeline {
 
 
      // Set the DOCKER_HOST environment variable to the socat container's network address and exposed port, in order to use Socat's DOCKER Commands
-      DOCKER_HOST = 'tcp://host.docker.internal:2375' // Use the name of your dokcer host
+     // Not required for Course as it has packaged Docker together with Jenkins into the built Docker image 
+     // DOCKER_HOST = 'tcp://host.docker.internal:2375' // Use the name of your dokcer host
    }
 
-   tools { 
-         maven 'maven 3.9.12' 
-   }
+    // Not required for Course as it has packaged Maven together with Jenkins into the built Docker image 
+   // tools { 
+   //       maven 'maven 3.9.12' 
+   // }
 
    stages {
       // This is to test whether Docker Command can be accessed
@@ -46,13 +48,15 @@ pipeline {
       
       stage('Build') {
          steps {
-               withMaven(maven: 'maven 3.9.12') { // Use the name configured in Global Tool Configuration to find the correct MAVEN_HOME
-                  sh '''export MAVEN_HOME=/tmp/maven/apache-maven-3.9.12'''
-                  sh '''export PATH=$PATH:$MAVEN_HOME/bin'''
-                  sh '''/tmp/maven/apache-maven-3.9.12/bin/mvn --version'''
+               // Not required for Course as it has packaged Docker together with Jenkins into the built Docker image 
+               // withMaven(maven: 'maven 3.9.12') { // Use the name configured in Global Tool Configuration to find the correct MAVEN_HOME
+               //   sh '''export MAVEN_HOME=/tmp/maven/apache-maven-3.9.12'''
+               //   sh '''export PATH=$PATH:$MAVEN_HOME/bin'''
+               //   sh '''/tmp/maven/apache-maven-3.9.12/bin/mvn --version'''
                   
-                  // sh '''./mvn clean package'''
-                  sh '''/tmp/maven/apache-maven-3.9.12/bin//mvn clean package'''
+                  sh '''mvn clean package'''
+                  // Not required for Course as it has packaged Docker together with Jenkins into the built Docker image 
+                  // sh '''/tmp/maven/apache-maven-3.9.12/bin//mvn clean package'''
                }
          }
       }
@@ -82,19 +86,22 @@ pipeline {
       stage('Deploy to Cluster') {
           steps {
                      // Install kubectl
-                     sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'
-                     sh 'chmod +x ./kubectl'
+                     // Not required for Course as it has packaged kubectl together with Jenkins into the built Docker image 
+                     // sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'
+                     // sh 'chmod +x ./kubectl'
 
                      // Install envsubst
-                     sh 'curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst'
-                     sh 'chmod +x ./envsubst'
+                     // Not required for Course as it has packaged envsubst together with Jenkins into the built Docker image 
+                     // sh 'curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst'
+                     // sh 'chmod +x ./envsubst'
 
                      // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
                      // The above command did not work due to authentication errors - hence add validate=false to bypass authentication for testing only
 
                      // ./ makes a difference; otherwise command not found error will be encountered
-                     sh './envsubst < ${WORKSPACE}/deploy.yaml | ./kubectl apply -f - --validate=false'
-                     // sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f - --validate=false'
+                     // Not required for Course as it has packaged envsubst together with Jenkins into the built Docker image 
+                     // sh './envsubst < ${WORKSPACE}/deploy.yaml | ./kubectl apply -f - --validate=false'
+                     sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f - --validate=false'
                   
           }
       }
