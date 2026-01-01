@@ -57,7 +57,6 @@ pipeline {
                   sh '''mvn clean package'''
                   // Not required for Course as it has packaged Docker together with Jenkins into the built Docker image 
                   // sh '''/tmp/maven/apache-maven-3.9.12/bin//mvn clean package'''
-               }
          }
       }
       
